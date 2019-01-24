@@ -1,1 +1,1 @@
-#define VALOR1 = 69
+#define VALOR1 69

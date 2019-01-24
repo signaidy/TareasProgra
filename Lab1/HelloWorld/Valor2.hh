@@ -1,1 +1,1 @@
-#define VALOR2 = 42
+#define VALOR2 42

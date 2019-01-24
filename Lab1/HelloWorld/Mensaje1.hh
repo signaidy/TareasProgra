@@ -1,1 +1,1 @@
-#define MENSAJE1 = "holii"
+#define MENSAJE1 "holii"

@@ -9,6 +9,23 @@ float Fuerza(float g, float F)
 	float f = g - F;
 	return f;
 }
+float calc(float G, float K, float a, float v, float d, float dt)
+{
+	float t;
+	float T;
+	float F;
+	std::printf("Ingrese tiempo de caida:");
+	std::cin>>T;
+	for(t=0; t <= T; t= t + dt)
+		{
+			v =v + a*dt;
+			F = FuerzaResistencia(K, v);
+			d = d + v*dt;
+			a = Fuerza(G, F);
+		}
+	std::printf("La velocidad final es: %f, y la distancia recorrida fue de: %f.\n", v, d);
+	return 0;
+}
 int main()
 {
 	const float Gt = 9.8;
@@ -19,13 +36,11 @@ int main()
 	const float Ks = 0;
 	float v;
 	float a = 0;
-	float T;
-	float t;
+	float dt = 0.01;
 	const int obj = 1;
 	const int A = 1;
 	float d;
 	float Fk;
-	float F;
 	char x;
 	int hue = 0;
 	while(hue == 0)
@@ -34,56 +49,26 @@ int main()
 		std::cin>>x;
 		if(x=='s')
 		{
-			hue++;
+			hue = 1;
 		}else
 		{
-			std::printf("Ingrese tiempo de caida:")
-			std::cin>>T;
 			if(x == 't')
 			{
-				for(t=0; t <= T; t= t + 0.01)
-				{
-					v = a*t;
-					Fk = FuerzaResistencia(Kp, v);
-					d = v*t;
-					a = Fuerza(Gt, Fk);
-				}
-				std::printf("La velocidad final es: %f, y la distancia recorrida fue de: %f.\n", v, d);
+				calc(Gt, Kp, a, v, d, dt);	
 			}else if(x == 'v')
 			{
-				for(t=0; t <= T; t= t + 0.01)
-				{
-					v = a*t;
-					Fk = FuerzaResistencia(Kp, v);
-					d = v*t;
-					a = Fuerza(Gv, Fk);
-				}
-				std::printf("La velocidad final es: %f, y la distancia recorrida fue de: %f.\n", v, d);
+				calc(Gv, Kp, a, v, d, dt);
 			}else if(x == 'l')
 			{
-				for(t=0; t <= T; t= t + 0.01)
-				{
-					v = a*t;
-					Fk = FuerzaResistencia(Ks, v);
-					d = v*t;
-					a = Fuerza(Gl, Fk);
-				}
-				std::printf("La velocidad final es: %f, y la distancia recorrida fue de: %f.\n", v, d);
+				calc(Gl, Ks, a, v, d, dt);
 			}else if(x == 'c')
 			{
-				for(t=0; t <= T; t= t + 0.01)
-				{
-					v = a*t;
-					Fk = FuerzaResistencia(Ks, v);
-					d = v*t;
-					a = Fuerza(Gc, Fk);
-				}
-				std::printf("La velocidad final es: %f, y la distancia recorrida fue de: %f.\n", v, d);
+				calc(Gc, Ks, a, v, d, dt);
 			}else 
 			{
-				std::printf("A metido un valor no reconocido por mi >:( ");
+				std::printf("A metido un valor no reconocido por mi >:(\n");
 			}
 		}
 	}
-	return 0;
+	return 0;	
 }
